@@ -11,8 +11,20 @@ let sigilButtons = document.querySelectorAll('.sigilContainer'),
 function showLightBox() {
 	// pop open a lightbox here and show some content
 	//start with video
+
+	//need to get the class name from the element 
+	//to match the video source and load it in
+	this.className.split()[1];
+
+	let targetName = this.className.split(" ")[1];
+	let targetSource = targetName.charAt(0).toUpperCase() + targetName.slice(1);
+	let newVideoSource = `video/House-${targetSource}.mp4`;
+
 	lightBox.classList.add("showLightBox");
 
+	gotVideo.src = newVideoSource;
+
+	gotVideo.load();
 	gotVideo.play();
 }
 
