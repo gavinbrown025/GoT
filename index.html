@@ -1,29 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>DOM Traversal</title>
-<link href="css/meyerReset.css" rel="stylesheet" type="text/css" media="screen">
-<link href="css/GOT_master.css" rel="stylesheet" type="text/css" media="screen">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>DOM Traversal</title>
+    <link
+      href="css/meyerReset.css"
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+    />
+    <link
+      href="css/GOT_master.css"
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+    />
+  </head>
 
-<body>
+  <body>
     <main>
-
-    <section id="imageContainer">
-    	<div id="houseImages"> <!-- add in all of the images to make a scrolling "banner" -->
-    		<img src="images/stark.jpg"/>
-    		<img src="images/baratheon.jpg"/>
-    		<img src="images/lannister.jpg"/>
-    		<img src="images/tully.jpg"/>
-    		<img src="images/greyjoy.jpg"/>
-    		<img src="images/arryn.jpg"/>
+      <section id="imageContainer">
+        <div id="houseImages">
+          <!-- add in all of the images to make a scrolling "banner" -->
+          <img src="images/stark.jpg" />
+          <img src="images/baratheon.jpg" />
+          <img src="images/lannister.jpg" />
+          <img src="images/tully.jpg" />
+          <img src="images/greyjoy.jpg" />
+          <img src="images/arryn.jpg" />
         </div>
     </section>
-
+    
     <nav id="bottomNav">
-    	<ul id="navList">
-        	<!-- custom data attribute, allowing to pass custom data https://developer.mozilla.org/en/docs/Web/API/HTMLElement/dataset -->
+        <ul id="navList">
+            <!-- custom data attribute, allowing to pass custom data https://developer.mozilla.org/en/docs/Web/API/HTMLElement/dataset -->
             <li><div class="sigilContainer stark" data-offset="0"></div></li>
             <li><div class="sigilContainer baratheon" data-offset="1"></div></li>
             <li><div class="sigilContainer lannister" data-offset="2"></div></li>
@@ -32,20 +42,39 @@
             <li><div class="sigilContainer arryn" data-offset="5"></div></li>
         </ul>
     </nav>
+    
+    <h1>Choose your house</h1>
+    <p class="house-info"></p>
+    <div class="playOption">
+        <img src="images/playbutton.svg" alt="play button" /> 
+        <p> Play Video</p>
+    </div>
+    </main>
+    <!--end mainContainer-->
 
-    <h1>clever tagline goes here</h1><!-- replace this with the house name -->
+    <!-- Lightbox goes here, at the top of the stack -->
+    <section class="lightBox">
+      <div class="vidCon">
+        <span class="lightBox-close">X</span>
 
-    <p class="house-info"></p><!-- replace this with house details (github gist) -->
-</main>  <!--end mainContainer-->
+        <video src="video/House-Stark.mp4"></video>
 
-<!-- Lightbox goes here, at the top of the stack -->
-<section class="lightBox">
-    <span class="lightBox-close">X</span>
-    <video src="video/House-Stark.mp4" controls></video>
-    <button class="playPause"></button>
-    <button class="rewind"></button>
-</section>
+        <div class="controls">
+          <div class="timeBar">
+            <div class="time"></div>
+          </div>
 
-<script src="js/GOT_master.js"></script>
-</body>
+          <div class="buttons">
+            <img src="images/pause.svg" id="playPause">
+            <div>
+                <img src="images/volume.svg" alt="">
+                <input type="range" id="volume" value="100">
+            </div>
+          </img>
+        </div>
+      </div>
+    </section>
+
+    <script src="js/GOT_master.js"></script>
+  </body>
 </html>
