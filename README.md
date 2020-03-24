@@ -10,7 +10,7 @@ Afterwards you can check out the the banners and read the brief that come with e
 ## Enjoy!
 
 ### Built with:
-HTML and CSS
+HTML, CSS, and JS
 
 ### Authors
 Trevor VanRys, Gavin Brown
