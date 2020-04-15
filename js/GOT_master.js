@@ -1,17 +1,19 @@
 (() => {
-  // variables at the top -. elements on the page we need to work with
+  // * variables at the top -. elements on the page we need to work with
 
   let sigilButtons = document.querySelectorAll(".sigilContainer"),
-    lightBox = document.querySelector(".lightBox"),
-    gotVideo = document.querySelector(".lightBox video"),
-    closeLightBox = lightBox.querySelector(".lightBox-close"),
-    houseName = document.querySelector("h1"),
-    houseDesc = document.querySelector(".house-info"),
-    houseImages = document.querySelector("#houseImages"),
-    playOption = document.querySelector(".playOption"),
-    timeBar = document.querySelector(".time"),
-    playBtn = document.querySelector("#playPause"),
-    volume = document.querySelector("#volume");
+		lightBox = document.querySelector(".lightBox"),
+		gotVideo = document.querySelector(".lightBox video"),
+		closeLightBox = lightBox.querySelector(".lightBox-close"),
+		houseName = document.querySelector("h1"),
+		houseDesc = document.querySelector(".house-info"),
+		houseImages = document.querySelector("#houseImages"),
+		playOption = document.querySelector(".playOption"),
+		progressBar = document.querySelector(".timeBar"),
+		timeFill = document.querySelector(".time"),
+		playBtn = document.querySelector("#playPause"),
+		volume = document.querySelector("#volume"),
+		muteBtn = document.querySelector("#volumeBtn");
 
   const houseData = [
     [
@@ -43,22 +45,42 @@
       `House Targaryen of Dragonstone is a Great House of Westeros and was the ruling royal House of the Seven Kingdoms for three centuries since it conquered and unified the realm, before it was deposed during Robert's Rebellion and House Baratheon replaced it as the new royal House. The few surviving Targaryens fled into exile to the Free Cities of Essos across the Narrow Sea. Currently based on Dragonstone off of the eastern coast of Westeros, House Targaryen seeks to retake the Seven Kingdoms from House Lannister, who formally replaced House Baratheon as the royal House following the destruction of the Great Sept of Baelor.`
     ],
     [
+      "Tyrell",
+      `House Tyrell of Highgarden is an extinct Great House of Westeros. It ruled over the Reach, a vast, fertile, and heavily-populated region of southwestern Westeros, from their castle-seat of Highgarden as Lords Paramount of the Reach and Wardens of the South after taking control of the region from House Gardener during the Targaryen conquest.`
+    ],
+    [
       "Frey",
       `House Frey of the Twins was the Great House of the Riverlands, having gained their position for their treachery against their former liege lords, House Tully, who were stripped of all their lands and titles for their rebellion against the Iron Throne; House Tully had supported the independence movement for the Kingdom of the North. The current head of the house is unknown following the assassinations of Lord Walder Frey and two of his sons, Lothar Frey and Walder Rivers, by the vengeful Arya Stark. This is made more complex by the subsequent assassination of all the male Freys soon after.`
     ]
   ];
 
-  //events go in the middle
+  // * ---------------EVENTS / FUNCTIONS-----------------
+
+
+  function animateBanners() {
+    let targetName = this.classList[1];   
+    houseName.textContent = `House ${houseData[this.dataset.offset][0]}`;
+    houseDesc.textContent = `${houseData[this.dataset.offset][1]}`;    
+    
+    playOption.classList.add("showPlayOption");
+    
+    let offsetValue = -600;
+    let movement = offsetValue * this.dataset.offset;
+    
+    gsap.to(houseImages, {
+		x: `${movement}px`,
+		duration: .75,
+		ease: "power1.inOut",
+		onComplete: loadVideo,
+		onCompleteParams: [targetName],
+	});
+  }
 
   //start with video
-
-  function loadVideo() {
-    //need to get the class name from the element
-    //to match the video source and load it in
-    this.className.split()[1];
-    let targetName = this.className.split(" ")[1];
-    let targetSource = targetName.charAt(0).toUpperCase() + targetName.slice(1);
-    let newVideoSource = `video/House-${targetSource}.mp4`; // animate banners in css using some basic math
+  function loadVideo(source) {
+    console.log(source);
+    let targetSource = source.charAt(0).toUpperCase() + source.slice(1);
+    let newVideoSource = `video/House-${targetSource}.mp4`;
     gotVideo.src = newVideoSource;
     showLightBox();
   }
@@ -67,66 +89,71 @@
     lightBox.classList.add("showLightBox");
     gotVideo.load();
     gotVideo.play();
+    console.log("Video Played");
   }
 
   function hideLightBox() {
     lightBox.classList.remove("showLightBox");
-
     gotVideo.pause();
     gotVideo.currentTime = 0;
   }
 
-  function animateBanners() {
-    playOption.classList.add("showPlayOption");
-    // start by changing house name
-    houseName.textContent = `House ${houseData[this.dataset.offset][0]}`;
-    houseDesc.textContent = `${houseData[this.dataset.offset][1]}`;
-
-    let offsetValue = 600;
-    let movement = offsetValue * this.dataset.offset;
-
-    houseImages.style.right = `${movement}px`;
-  }
-
   function playToggle() {
     if (gotVideo.paused) {
-      playBtn.src = "images/pause.svg";
       gotVideo.play();
-    } else {
-      playBtn.src = "images/play.svg";
+      console.log("Video Played");
+    } else {      
       gotVideo.pause();
+      console.log("Video Paused");
     }
   }
+  gotVideo.addEventListener('play', function () {
+    playBtn.src = "images/pause.svg";
+  });
+  gotVideo.addEventListener('pause', function () {
+		playBtn.src = "images/play.svg";
+	});
 
   function timeTrack() {
-    var timePos = gotVideo.currentTime / gotVideo.duration;
-    timeBar.style.width = timePos * 100 + "%";
+    var timePos = gotVideo.currentTime / gotVideo.duration * 100;
+    timeFill.style.width = `${timePos}%`;
+  }
+
+  function scrub(event) {
+    let scrubTime = (event.offsetX / progressBar.offsetWidth) * gotVideo.duration;
+    gotVideo.currentTime = scrubTime;
   }
 
   function volumeToggle(event) {
+    muteBtn.src = "images/volume.svg";
     gotVideo.volume = event.currentTarget.value / 100;
-    console.log(currentTarget);
+    console.log(gotVideo.volume * 100 + "%" + " volume");
   }
 
-  playOption.addEventListener("click", showLightBox);
+  function muteToggle() {
+    muteBtn.src = "images/volumeoff.svg";
+    gotVideo.volume = 0;
+    volume.value = 0;
+  }
 
-  volume.addEventListener("change", volumeToggle);
-
-  playBtn.addEventListener("click", playToggle);
-
-  // time bar showing how much video is played/to ply
-  gotVideo.addEventListener("timeupdate", timeTrack);
-
-  gotVideo.addEventListener("click", playToggle);
+  // * ---------------EVENT LISENERS -----------------
 
   //add event to the sigil buttons - changes the data and the video source
-  sigilButtons.forEach(button => button.addEventListener("click", loadVideo));
-
-  //add event to the sigil buttons - changes the data and the video source
-  sigilButtons.forEach(button =>
-    button.addEventListener("click", animateBanners)
+  sigilButtons.forEach(sigil =>
+    sigil.addEventListener("click", animateBanners)
   );
 
+  volume.addEventListener("change", volumeToggle);
+  muteBtn.addEventListener("click", muteToggle);
+  
+  // time bar showing how much video is played/to ply
+  playBtn.addEventListener("click", playToggle); 
+  gotVideo.addEventListener("click", playToggle);
+  
+  gotVideo.addEventListener("timeupdate", timeTrack);
+  progressBar.addEventListener('click', scrub);
+
+  playOption.addEventListener("click", showLightBox);
   // add event listener to close
   closeLightBox.addEventListener("click", hideLightBox);
 })();

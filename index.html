@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>DOM Traversal</title>
+    <title>GOT | Houses</title>
     <link
       href="css/meyerReset.css"
       rel="stylesheet"
@@ -20,7 +20,7 @@
   <body>
     <main>
       <section id="imageContainer">
-        <div id="houseImages">
+        <div id="houseImages" style="right:;">
           <!-- add in all of the images to make a scrolling "banner" -->
           <img src="images/stark.jpg" />
           <img src="images/baratheon.jpg" />
@@ -28,34 +28,40 @@
           <img src="images/tully.jpg" />
           <img src="images/greyjoy.jpg" />
           <img src="images/arryn.jpg" />
+          <img src="images/targaryen.jpg" />
+          <img src="images/tyrell.jpg" />
+          <img src="images/frey.jpg" />
         </div>
-    </section>
-    
-    <nav id="bottomNav">
-        <ul id="navList">
-            <!-- custom data attribute, allowing to pass custom data https://developer.mozilla.org/en/docs/Web/API/HTMLElement/dataset -->
-            <li><div class="sigilContainer stark" data-offset="0"></div></li>
-            <li><div class="sigilContainer baratheon" data-offset="1"></div></li>
-            <li><div class="sigilContainer lannister" data-offset="2"></div></li>
-            <li><div class="sigilContainer tully" data-offset="3"></div></li>
-            <li><div class="sigilContainer greyjoy" data-offset="4"></div></li>
-            <li><div class="sigilContainer arryn" data-offset="5"></div></li>
-        </ul>
-    </nav>
-    
-    <h1>Choose your house</h1>
-    <p class="house-info"></p>
-    <div class="playOption">
+      </section>
+      
+      <nav id="bottomNav">
+          <ul id="navList">
+              <!-- custom data attribute, allowing to pass custom data https://developer.mozilla.org/en/docs/Web/API/HTMLElement/dataset -->
+              <li><div class="sigilContainer stark" data-offset="0"></div></li>
+              <li><div class="sigilContainer baratheon" data-offset="1"></div></li>
+              <li><div class="sigilContainer lannister" data-offset="2"></div></li>
+              <li><div class="sigilContainer tully" data-offset="3"></div></li>
+              <li><div class="sigilContainer greyjoy" data-offset="4"></div></li>
+              <li><div class="sigilContainer arryn" data-offset="5"></div></li>
+              <li><div class="sigilContainer targaryen" data-offset="6"></div></li>
+              <li><div class="sigilContainer tyrell" data-offset="7"></div></li>
+              <li><div class="sigilContainer frey" data-offset="8"></div></li>
+          </ul>
+      </nav>
+      
+      <h1>Choose your house</h1>
+      <p class="house-info"></p>
+      <div class="playOption">
         <img src="images/playbutton.svg" alt="play button" /> 
-        <p> Play Video</p>
-    </div>
+        <p>Play Video</p>
+      </div>
     </main>
     <!--end mainContainer-->
 
     <!-- Lightbox goes here, at the top of the stack -->
     <section class="lightBox">
       <div class="vidCon">
-        <span class="lightBox-close">X</span>
+        <span class="lightBox-close">+</span>
 
         <video src="video/House-Stark.mp4"></video>
 
@@ -67,14 +73,14 @@
           <div class="buttons">
             <img src="images/pause.svg" id="playPause">
             <div>
-                <img src="images/volume.svg" alt="">
+                <img src="images/volume.svg" alt="" id="volumeBtn">
                 <input type="range" id="volume" value="100">
             </div>
-          </img>
+          </div>
         </div>
       </div>
     </section>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.js"></script>
     <script src="js/GOT_master.js"></script>
   </body>
 </html>
