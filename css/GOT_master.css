@@ -53,8 +53,7 @@ main {
 
 #houseImages {
   position: relative;
-  width: 4000px;
-  transition: all 0.5s;
+  width: 5800px;
 }
 
 #houseImages img {
@@ -82,9 +81,6 @@ main {
   overflow: hidden;
   background-image: url(../images/GOT_sprites.png);
   background-repeat: no-repeat;
-  transition: transform 0.3s;
-  -webkit-transition: -webkit-transform 0.3s;
-  -moz-transition: -moz-transform 0.3s;
 }
 
 .stark {
@@ -128,6 +124,27 @@ main {
 .arryn:hover {
   background-position: -253px 0px;
 }
+
+.targaryen {
+  background-position: -303px -55px;
+}
+.targaryen:hover {
+  background-position: -303px -1px;
+}
+
+.tyrell {
+  background-position: -353px -55px;
+}
+.tyrell:hover {
+  background-position: -353px -1px;
+}
+
+.frey {
+  background-position: -404px -55px;
+}
+.frey:hover {
+  background-position: -404px -1px;
+}
 /* ----- end image sprite ----- */
 
 /* ----- classes for transitions ----- */
@@ -160,18 +177,25 @@ main {
 }
 
 .lightBox-close {
+  font-family: Arial, Helvetica, sans-serif;
+  transform: rotate(45deg);
   position: absolute;
   right: 15px;
   top: 15px;
   color: #fff;
-  font-size: 24px;
+  font-size: 48px;
+  text-shadow: 0 0 2px black;
   z-index: 1;
   cursor: pointer;
+}
+.lightBox-close:hover {
+  color: red;
 }
 
 .playOption {
   display: none;
   cursor: pointer;
+  margin: 0 10px 20px 0;
 }
 
 .playOption img {
@@ -217,17 +241,30 @@ video {
 .buttons {
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
   padding: 5px;
   width: 100%;
   height: 30px;
 }
 
 .buttons img {
+  cursor: pointer;
   width: 30px;
 }
 
 .buttons input {
+  cursor: pointer;
+  margin-right: 30px;
+}
+.rightControls {
+  display: flex;
+  flex-direction: row;
+}
+
+.timer {
+  width: 5%;
+  display: flex;
+  flex-direction: row;
+  line-height: 30px;
   margin-right: 30px;
 }
 
@@ -237,6 +274,7 @@ video {
   left: 0;
   width: 100%;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .time {
