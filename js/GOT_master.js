@@ -10,10 +10,14 @@
 		houseImages = document.querySelector("#houseImages"),
 		playOption = document.querySelector(".playOption"),
 		progressBar = document.querySelector(".timeBar"),
-		timeFill = document.querySelector(".time"),
+    timeFill = document.querySelector(".time"),
+
+    curTime = document.querySelector(".curTime"),
+    durTime = document.querySelector(".durTime"),
+
 		playBtn = document.querySelector("#playPause"),
 		volume = document.querySelector("#volume"),
-		muteBtn = document.querySelector("#volumeBtn");
+    muteBtn = document.querySelector("#volumeBtn");
 
   const houseData = [
     [
@@ -117,6 +121,16 @@
   function timeTrack() {
     var timePos = gotVideo.currentTime / gotVideo.duration * 100;
     timeFill.style.width = `${timePos}%`;
+
+    let curMins = Math.floor(gotVideo.currentTime / 60);
+    let durMins = Math.floor(gotVideo.duration / 60);
+    
+    let curSecs = Math.floor(gotVideo.currentTime - curMins * 60);
+    let durSecs = Math.round(gotVideo.duration - durMins * 60);
+    if (curSecs < 10) {curSecs ="0" + curSecs;}
+    if (durSecs < 10) {durSecs ="0" + durSecs;}
+    curTime.textContent = curMins + ":" + curSecs;
+    durTime.textContent = durMins + ":" + durSecs;
   }
 
   function scrub(event) {
@@ -156,4 +170,5 @@
   playOption.addEventListener("click", showLightBox);
   // add event listener to close
   closeLightBox.addEventListener("click", hideLightBox);
+  gotVideo.addEventListener('ended', hideLightBox);
 })();

@@ -187,6 +187,7 @@ main {
   text-shadow: 0 0 2px black;
   z-index: 1;
   cursor: pointer;
+  opacity: 0;
 }
 .lightBox-close:hover {
   color: red;
@@ -222,6 +223,9 @@ main {
 .vidCon:hover .controls {
   transform: translateY(0);
 }
+.vidCon:hover .lightBox-close {
+  opacity: 1;
+}
 
 video {
   width: 100%;
@@ -255,18 +259,6 @@ video {
   cursor: pointer;
   margin-right: 30px;
 }
-.rightControls {
-  display: flex;
-  flex-direction: row;
-}
-
-.timer {
-  width: 5%;
-  display: flex;
-  flex-direction: row;
-  line-height: 30px;
-  margin-right: 30px;
-}
 
 .timeBar {
   height: 10px;
@@ -276,8 +268,30 @@ video {
   background-color: #fff;
   cursor: pointer;
 }
-
 .time {
   height: 10px;
   background-color: red;
 }
+
+.controlsRight {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+  font-size: 18px;
+  line-height: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+}
+
+#volume {
+  width:0;
+  opacity: 0;
+  transition:all ease-in-out 200ms;
+}
+
+.controlsRight:hover #volume {
+  opacity: 1;
+  width: 120px;
+}
+
+
