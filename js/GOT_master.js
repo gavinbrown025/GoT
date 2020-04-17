@@ -119,7 +119,7 @@
 	});
 
   function timeTrack() {
-    var timePos = gotVideo.currentTime / gotVideo.duration * 100;
+    let timePos = gotVideo.currentTime / gotVideo.duration * 100;
     timeFill.style.width = `${timePos}%`;
 
     let curMins = Math.floor(gotVideo.currentTime / 60);
