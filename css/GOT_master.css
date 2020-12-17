@@ -208,7 +208,6 @@ main {
 .playOption:hover img {
   transform: scale(1.05);
 }
-
 .showPlayOption {
   display: flex;
   justify-content: center;
